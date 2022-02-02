@@ -34,10 +34,16 @@ module.exports = async (app = require('express')()) => {
             const body = Buffer.from(fileResponse.data, 'binary');
             const file = {
                 name: originalname,
+                contentType: 'application/octet-stream',
                 body
             };
             const encodedFileName = encodeURIComponent(file.name).replace(/['()]/g, escape).replace(/\*/g, '%2A').replace(/%(?:7C|60|5E)/g, unescape);
-            response.set({ 'Content-Disposition': `attachment; filename*=UTF-8''${encodedFileName}` });
+            response.set({
+                'Content-Disposition': `inline; filename*=UTF-8''${encodedFileName}`,
+                'Content-Type': file.contentType,
+                'Last-Modified': (new Date()).toUTCString(),
+                'Cache-Control': 'no-cache'
+            });
             return response.send(file.body);
         } catch (error) {
             return response.send(JSON.stringify(error));
