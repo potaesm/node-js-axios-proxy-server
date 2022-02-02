@@ -31,7 +31,7 @@ module.exports = async (app = require('express')()) => {
                 originalname = chunks[chunks.length - 1];
             }
             const fileResponse = await axios.default.get(decodeURIComponent(url), { responseType: 'arraybuffer' });
-            const body = Buffer.from(fileResponse.data, 'binary');
+            const body = Buffer.from(fileResponse.data).toString('base64');
             const file = {
                 name: originalname,
                 body
