@@ -4,11 +4,8 @@ module.exports = async (app = require('express')()) => {
     app.get('/', async (request, response) => {
         try {
             const { url } = request.query;
-            const axiosResponse = await axios.default({
-                method: 'get',
-                url
-              });
-            return axiosResponse.data.pipe(response);
+            const axiosResponse = await axios.default.get(url);
+            return response.send(axiosResponse.data);
         } catch (error) {
             return response.send(JSON.stringify(error));
         }
@@ -17,6 +14,33 @@ module.exports = async (app = require('express')()) => {
         try {
             const { url } = request.query;
             const axiosResponse = await axios.default.post(url, request.body);
+            return response.send(axiosResponse.data);
+        } catch (error) {
+            return response.send(JSON.stringify(error));
+        }
+    });
+    app.put('/', async (request, response) => {
+        try {
+            const { url } = request.query;
+            const axiosResponse = await axios.default.put(url, request.body);
+            return response.send(axiosResponse.data);
+        } catch (error) {
+            return response.send(JSON.stringify(error));
+        }
+    });
+    app.patch('/', async (request, response) => {
+        try {
+            const { url } = request.query;
+            const axiosResponse = await axios.default.patch(url, request.body);
+            return response.send(axiosResponse.data);
+        } catch (error) {
+            return response.send(JSON.stringify(error));
+        }
+    });
+    app.delete('/', async (request, response) => {
+        try {
+            const { url } = request.query;
+            const axiosResponse = await axios.default.delete(url);
             return response.send(axiosResponse.data);
         } catch (error) {
             return response.send(JSON.stringify(error));
