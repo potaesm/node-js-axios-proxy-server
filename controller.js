@@ -6,8 +6,7 @@ module.exports = async (app = require('express')()) => {
             const { url } = request.query;
             const axiosResponse = await axios.default({
                 method: 'get',
-                url,
-                responseType: 'stream'
+                url
               });
             return axiosResponse.data.pipe(response);
         } catch (error) {
