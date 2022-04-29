@@ -4,8 +4,12 @@ module.exports = async (app = require('express')()) => {
     app.get('/', async (request, response) => {
         try {
             const { url } = request.query;
-            const axiosResponse = await axios.default.get(url);
-            return response.send(axiosResponse.data);
+            const axiosResponse = await axios.default({
+                method: 'get',
+                url,
+                responseType: 'stream'
+              });
+            return axiosResponse.data.pipe(response);
         } catch (error) {
             return response.send(JSON.stringify(error));
         }
