@@ -23,7 +23,7 @@ heroku ps:socks
   ```
 ## Spotify Proxy
 ```bash
-nano /Library/Application Support/Spotify/prefs
+nano ~/Library/Application Support/Spotify/prefs
 ```
 ```bash
 ...
