@@ -36,5 +36,5 @@ network.proxy.mode=4
   sed -i -e 's/network.proxy.mode=1/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
   sed -i -e 's/network.proxy.mode=2/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
   sed -i -e 's/network.proxy.mode=3/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
-  heroku ps:socks --app suthinan-proxy
+  while true; do heroku ps:socks --app suthinan-proxy && break; done
   ```
