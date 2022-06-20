@@ -31,3 +31,10 @@ network.proxy.addr="127.0.0.1:1080@socks5"
 network.proxy.mode=4
 ...
 ```
+* Spotify_Proxy.command
+  ```bash
+  sed -i -e 's/network.proxy.mode=1/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
+  sed -i -e 's/network.proxy.mode=2/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
+  sed -i -e 's/network.proxy.mode=3/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
+  heroku ps:socks --app suthinan-proxy
+  ```
