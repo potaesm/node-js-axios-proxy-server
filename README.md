@@ -33,8 +33,13 @@ network.proxy.mode=4
 ```
 * Spotify_Proxy.command
   ```bash
-  sed -i -e 's/network.proxy.mode=1/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
-  sed -i -e 's/network.proxy.mode=2/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
-  sed -i -e 's/network.proxy.mode=3/network.proxy.mode=4/g' ~/Library/Application\ Support/Spotify/prefs
-  while true; do curl https://suthinan-proxy.herokuapp.com/ && heroku ps:socks --app suthinan-proxy && break; done
+sed -i -e '/network.proxy.mode=/d' ~/Library/Application\ Support/Spotify/prefs
+sed -i -e '/network.proxy.addr=/d' ~/Library/Application\ Support/Spotify/prefs
+echo network.proxy.mode=4 >> ~/Library/Application\ Support/Spotify/prefs
+echo network.proxy.addr=\"127.0.0.1:1080@socks5\" >> ~/Library/Application\ Support/Spotify/prefs
+while true; do curl https://us-tunnel-ssh.herokuapp.com/ && heroku ps:socks --app us-tunnel-ssh && break; done
+  ```
+  * Spotify_Proxy_Restore.command
+  ```bash
+  sed -i -e 's/network.proxy.mode=4/network.proxy.mode=1/g' ~/Library/Application\ Support/Spotify/prefs
   ```
