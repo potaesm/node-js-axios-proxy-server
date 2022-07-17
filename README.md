@@ -37,6 +37,7 @@ network.proxy.mode=4
   sed -i -e '/network.proxy.addr=/d' ~/Library/Application\ Support/Spotify/prefs
   echo network.proxy.mode=4 >> ~/Library/Application\ Support/Spotify/prefs
   echo network.proxy.addr=\"127.0.0.1:1080@socks5\" >> ~/Library/Application\ Support/Spotify/prefs
+  heroku features:disable --app us-tunnel-ssh runtime-heroku-exec
   while true; do curl https://us-tunnel-ssh.herokuapp.com/ && heroku ps:socks --app us-tunnel-ssh && break; done
   ```
   * Spotify_Proxy_Restore.command
